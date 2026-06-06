@@ -2,11 +2,14 @@ import { Router } from "express";
 
 import { ProdutoController } from "../controllers/produto.controller";
 import { MovimentacaoController } from "../controllers/movimentacao.controller";
+import { autenticar } from "../middlewares/auth";
 
 const routes = Router();
 
 const controller = new ProdutoController();
 const movimentacaoController = new MovimentacaoController();
+
+routes.use(autenticar);
 
 routes.get("/", controller.index);
 
