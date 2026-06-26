@@ -2,6 +2,8 @@
 CREATE TABLE "Categoria" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "nome" TEXT NOT NULL,
+    "icone" TEXT NOT NULL,
+    "cor" TEXT NOT NULL,
     "criadoEm" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -26,6 +28,7 @@ CREATE TABLE "Usuario" (
     "nome" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "senha" TEXT NOT NULL,
+    "refreshToken" TEXT,
     "criadoEm" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 

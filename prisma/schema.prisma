@@ -9,7 +9,11 @@ datasource db {
 
 model Categoria {
   id        String     @id @default(cuid())
+
   nome      String
+  icone     String
+  cor       String
+  
   produtos  Produto[]
 
   criadoEm  DateTime @default(now())

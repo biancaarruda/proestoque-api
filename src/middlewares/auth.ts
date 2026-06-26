@@ -27,6 +27,7 @@ export function autenticar(
 
     const [tipo, token] = authHeader.split(" ");
 
+
     if (tipo !== "Bearer" || !token) {
       throw new AppError("Formato de token inválido", 401);
     }

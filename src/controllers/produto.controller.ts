@@ -80,16 +80,19 @@ export class ProdutoController {
         categoriaId,
         quantidade,
         quantidadeMinima,
-        preco,
+        preco: Number(preco),
         unidade,
         foto,
+      },
+      include: {
+        categoria: true,
       },
     });
 
     return response.status(201).json(produto);
   }
 
-  async update(request: Request, response: Response) {
+  /*(request: Request, response: Response) {
     const id = String(request.params.id);
 
     const produtoExiste =
@@ -106,14 +109,68 @@ export class ProdutoController {
     }
 
     const produto = await prisma.produto.update({
-      where: {
-        id,
+      where: { id },
+      data: {
+        ...request.body,
+        preco:
+          request.body.preco !== undefined
+            ? Number(request.body.preco)
+            : undefined,
       },
-      data: request.body,
+      include: {
+        categoria: true,
+      },
     });
 
     return response.json(produto);
   }
+    */
+  async update(request: Request, response: Response) {
+  const id = String(request.params.id);
+
+  const {
+    nome,
+    categoriaId,
+    quantidade,
+    quantidadeMinima,
+    preco,
+    unidade,
+    foto,
+  } = request.body;
+
+  const produtoExiste = await prisma.produto.findUnique({
+    where: { id },
+  });
+
+  if (!produtoExiste) {
+    return response.status(404).json({
+      erro: "Produto não encontrado",
+    });
+  }
+
+  const produto = await prisma.produto.update({
+    where: { id },
+    data: {
+      nome,
+      quantidade,
+      quantidadeMinima,
+      preco: Number(preco),
+      unidade,
+      foto,
+
+      categoria: {
+        connect: {
+          id: categoriaId,
+        },
+      },
+    },
+    include: {
+      categoria: true,
+    },
+  });
+
+  return response.json(produto);
+}
 
   async delete(request: Request, response: Response) {
     const id = String(request.params.id);

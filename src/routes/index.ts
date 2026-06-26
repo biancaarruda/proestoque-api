@@ -2,7 +2,6 @@ import { Router } from "express";
 
 import { produtoRoutes } from "./produto.routes";
 import { categoriaRoutes } from "./categoria.routes";
-import { movimentacaoRoutes } from "./movimentacao.routes";
 import { authRouter } from "./auth.routes";
 
 const routes = Router();

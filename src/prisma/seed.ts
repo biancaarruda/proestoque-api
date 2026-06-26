@@ -5,11 +5,26 @@ const prisma = new PrismaClient();
 async function main() {
   await prisma.categoria.createMany({
     data: [
-      { nome: "Bebidas" },
-      { nome: "Alimentos" },
-      { nome: "Limpeza" },
-      { nome: "Eletrônicos" },
-      { nome: "Papelaria" },
+      { nome: "Bebidas",
+        icone: "wine-outline",
+        cor: "#2563EB"
+       },
+      { nome: "Alimentos",
+        icone: "utensils-outline",
+        cor: "#10B981"
+      },
+      { nome: "Limpeza",
+        icone: "broom-outline",
+        cor: "#F59E0B"
+      },
+      { nome: "Eletrônicos",
+        icone: "phone-outline",
+        cor: "#8B5CF6"
+      },
+      { nome: "Papelaria",
+        icone: "book-outline",
+        cor: "#EF4444"
+      },
     ],
   });
 

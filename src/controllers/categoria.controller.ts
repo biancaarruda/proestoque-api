@@ -26,11 +26,13 @@ export class CategoriaController {
   }
 
   async create(request: Request, response: Response) {
-    const { nome } = request.body;
+    const { nome, icone, cor } = request.body;
 
     const categoria = await prisma.categoria.create({
       data: {
         nome,
+        icone,
+        cor,
       },
     });
 

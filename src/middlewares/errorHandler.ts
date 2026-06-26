@@ -24,6 +24,6 @@ export function errorHandler(
   }
   
   return response.status(500).json({
-    message: "Erro interno do servidor",
+    erro: "Erro interno do servidor",
   });
 }

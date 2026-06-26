@@ -23,6 +23,24 @@ export class MovimentacaoController {
       });
     }
 
+    if (
+      tipo !== "entrada" &&
+      tipo !== "saida"
+    ) {
+      return response.status(400).json({
+        erro: "Tipo inválido",
+      });
+    }
+
+    if (
+      tipo === "saida" &&
+      quantidade > produto.quantidade
+    ) {
+      return response.status(400).json({
+        erro: "Estoque insuficiente",
+      });
+    }
+
     const novaQuantidade =
       tipo === "entrada"
         ? produto.quantidade + quantidade
